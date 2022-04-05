@@ -23,4 +23,30 @@ switch ($_GET["op"]) {
         echo json_encode($results);
 
         break;
+
+        case "guardaryeditar";
+            $datos = $producto->get_producto_x_id($_POST["id_producto"]);
+            if(empty($_POST["id_producto"])){
+                if(is_array($datos)==true and count($datos)==0){
+                    $producto->insert_producto($_POST["nombre_producto"]); 
+                }
+            }else{
+                $producto->update_producto($_POST["id_producto"],$_POST["nombre_producto "]);
+            }
+            break;
+
+        case "mostrar":
+            $datos = $producto->get_producto_x_id($_POST["id_producto"]);
+            if(is_array($datos)==true and count($datos)>0){
+                foreach($datos as $row){
+                    $output["id_producto"] = $row["id_producto"];
+                    $output["nombre_producto"] = $row["nombre_producto"];
+
+                }
+            }
+            break;
+        case "elimiar":
+            $producto->delete_producto($_POST["id_producto"]);
+            break;
+
 }

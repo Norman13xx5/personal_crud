@@ -54,5 +54,13 @@ $(document).ready(function () {
     }).DataTable();
 });
 
+function editar(id_producto){
+    console.log(id_producto);
 
+}
+function eliminar(id_producto){
+    console.log(id_producto);
+
+    
+}
 init();
