@@ -10,8 +10,8 @@ switch ($_GET["op"]) {
         foreach ($datos as $row) {
             $sub_array = array();
             $sub_array[] = $row["nombre_producto"];
-            $sub_array[] = '<button type="button" onClick="editar('.$row["id_producto"].');" id="'.$row["id_producto"].'" class=btn btn-outline-primary btn-icon"><div><i class="fa fa-edit"></i></div></button>';
-            $sub_array[] = '<button type="button" onClick="eliminar('.$row["id_producto"].');" id="'.$row["id_producto"].'" class=btn btn=outline-danger bnt=ico"><div><i class="fa fa-trash"></i></div></button>';
+            $sub_array[] = '<button type="button" onClick="editar('.$row["id_producto"].');" id="'.$row["id_producto"].'" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-edit"></i></div></button>';
+            $sub_array[] = '<button type="button" onClick="eliminar('.$row["id_producto"].');" id="'.$row["id_producto"].'" class="btn btn-outline-danger btn-icon"><div><i class="fa fa-trash"></i></div></button>';
             $data[]=$sub_array;
         }
         $results = array(
@@ -31,7 +31,7 @@ switch ($_GET["op"]) {
                     $producto->insert_producto($_POST["nombre_producto"]); 
                 }
             }else{
-                $producto->update_producto($_POST["id_producto"],$_POST["nombre_producto "]);
+                $producto->update_producto($_POST["id_producto"],$_POST["nombre_producto"]);
             }
             break;
 
@@ -45,7 +45,8 @@ switch ($_GET["op"]) {
                 }
             }
             break;
-        case "elimiar":
+            
+        case "eliminar":
             $producto->delete_producto($_POST["id_producto"]);
             break;
 

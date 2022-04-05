@@ -1,6 +1,9 @@
 var tabla;
 
 function init() {
+    $("#form_producto").on("submit",function(e){
+        guardaryeditar(e);
+    });
 
 }
 $(document).ready(function () {
@@ -25,7 +28,7 @@ $(document).ready(function () {
         "bDestroy": true,
         "responsive": true,
         "bInfo": true,
-        "iDisplayLength": 2,//Por cada 10 registros hace una paginación
+        "iDisplayLength": 10,//Por cada 10 registros hace una paginación
         "order": [[0, "asc"]],//Ordenar (columna,orden)
         "language": {
             "sProcessing": "Procesando...",
@@ -54,13 +57,61 @@ $(document).ready(function () {
     }).DataTable();
 });
 
-function editar(id_producto){
+function guardaryeditar(e){
+    e.preventDefault();
+    var formData = new FormData($("#form_producto")[0]);
+    $.ajax({
+        url: "../../controller/producto.php?op=guardaryeditar",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(datos){
+            $('#form_producto')[0].reset();
+            $("#modalmantenimiento").modal('hide');
+            $('#data_producto').DataTable().ajax.reload();
+            swal.fire(
+                'Registro!',
+                'Se registró correctamente.',
+                'success'     
+            )
+        }
+    });
+}
+
+function editar(id_producto) {
     console.log(id_producto);
 
 }
-function eliminar(id_producto){
-    console.log(id_producto);
+function eliminar(id_producto) {
+    swal.fire({
+        title: "Alerta",
+        text: "Está seguro de Eliminar el registro?",
+        icon: "error",
+        showCancelButton: true,
+        confirmButtonText: "Si",
+        cancelButtonText: "No",
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
 
-    
+           $.post("../../controller/producto.php?op=eliminar",{id_producto:id_producto},function (data) {
+
+           });
+           $('#data_producto').DataTable().ajax.reload();
+
+            swal.fire(
+                'Eliminado',
+                'El registro se eliminó correctamente :)',
+                'success'
+            )
+        }
+    })
 }
+
+$(document).on("click", "#btn_nuevo", function () {
+    $('#mdltitulo').html('Nuevo Registro');
+    $('#modalmantenimiento').modal('show');
+});
+
 init();
