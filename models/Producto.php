@@ -57,7 +57,7 @@ class Producto extends Conectar
                     id_producto = ?";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $nombre_producto);
-        $sql->bindValue(2, $$id_producto);
+        $sql->bindValue(2, $id_producto);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }

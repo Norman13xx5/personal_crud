@@ -41,8 +41,8 @@ switch ($_GET["op"]) {
                 foreach($datos as $row){
                     $output["id_producto"] = $row["id_producto"];
                     $output["nombre_producto"] = $row["nombre_producto"];
-
                 }
+                echo json_encode($output);
             }
             break;
             

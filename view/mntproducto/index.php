@@ -54,7 +54,7 @@
 
     <?php require_once("modalmantenimiento.php"); ?>
 
-    <?php require_once("../../mainjs.php"); ?>
+    <?php require_once("../../body.php"); ?>
 
     <script type="text/javascript" src="mntproducto.js"></script>
 </body>

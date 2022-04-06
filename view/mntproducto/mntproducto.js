@@ -80,10 +80,19 @@ function guardaryeditar(e){
 }
 
 function editar(id_producto) {
-    console.log(id_producto);
+    $('#mdltitulo').html('Editar Registro');
+
+    $.post("../../controller/producto.php?op=mostrar",{id_producto : id_producto},function (data) {
+        data = JSON.parse(data);
+        $('#id_producto').val(data.id_producto);
+        $('#nombre_producto').val(data.nombre_producto);
+    });
+    
+    $('#modalmantenimiento').modal('show');
 
 }
 function eliminar(id_producto) {
+
     swal.fire({
         title: "Alerta",
         text: "Está seguro de Eliminar el registro?",
@@ -111,6 +120,8 @@ function eliminar(id_producto) {
 
 $(document).on("click", "#btn_nuevo", function () {
     $('#mdltitulo').html('Nuevo Registro');
+    $('#form_producto')[0].reset();
+    $('#id_producto').val('');
     $('#modalmantenimiento').modal('show');
 });
 
