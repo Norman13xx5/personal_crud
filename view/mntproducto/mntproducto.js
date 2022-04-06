@@ -86,6 +86,7 @@ function editar(id_producto) {
         data = JSON.parse(data);
         $('#id_producto').val(data.id_producto);
         $('#nombre_producto').val(data.nombre_producto);
+        $('#descripcion_producto').val(data.descripcion_producto);
     });
     
     $('#modalmantenimiento').modal('show');
@@ -122,6 +123,7 @@ $(document).on("click", "#btn_nuevo", function () {
     $('#mdltitulo').html('Nuevo Registro');
     $('#form_producto')[0].reset();
     $('#id_producto').val('');
+    $('#descripcion_producto').val('');
     $('#modalmantenimiento').modal('show');
 });
 
